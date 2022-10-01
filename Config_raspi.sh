@@ -7,7 +7,7 @@ Menu () {
     echo "3 - Vérifier le fonctionnement des services"
     echo "4 - Arret du script"
     echo ""
-    read -r "Choisissez une option (1-3) : " Input_String
+    read -p "Choisissez une option (1-3) : " Input_String
     case $Input_String in 
         1)
             UpdateAndInstallAndEnable    
@@ -44,13 +44,15 @@ Menu
 
 ConfigRaspi () {
 #Montage du disque en ntfs
-read -p "Entrer le nom du périphérique (ex : sda1)" disk
+read -p "Entrer le nom du périphérique (ex : /dev/sda1) : " disk
 sudo mkdir /mnt/HDD
-sudo mount /dev/$(disk) /mnt/HDD
+sudo mount $disk /mnt/HDD
 sudo chown -R fguillouet:fguillouet /mnt/HDD
 sudo chmod -R 755 /mnt/HDD
 
-pause
+echo ""
+echo ""
+read -p "En attente d'un appui de touche ..."
 
 clear 
 
