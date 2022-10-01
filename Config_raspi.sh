@@ -7,7 +7,7 @@ Menu () {
     echo "3 - Vérifier le fonctionnement des services"
     echo "4 - Arret du script"
     echo ""
-    read -r "Choisissez une option (1-4) : " Input_String
+    read -r "Choisissez une option (1-3) : " Input_String
     case $Input_String in 
         1)
             UpdateAndInstallAndEnable    
@@ -16,9 +16,6 @@ Menu () {
             ConfigRaspi
         ;;
         3)
-            CheckServices
-        ;;
-        4)
             echo "!! Arrêt du script !!"
             return
         ;;
@@ -49,21 +46,13 @@ ConfigRaspi () {
 #Montage du disque en ntfs
 read -p "Entrer le nom du périphérique (ex : sda1)" disk
 sudo mkdir /mnt/HDD
-sudo mount /dev/$disk /mnt/HDD
-sudo chown -R pi:pi /mnt/HDD
+sudo mount /dev/$(disk) /mnt/HDD
+sudo chown -R fguillouet:fguillouet /mnt/HDD
 sudo chmod -R 755 /mnt/HDD
 
 pause
 
 clear 
-
-#Retour au menu
-Menu
-}
-
-CheckServices () {
-sudo service smbd status
-sudo service ntfs-3g status
 
 #Retour au menu
 Menu
