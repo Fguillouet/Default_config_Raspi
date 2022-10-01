@@ -47,7 +47,7 @@ ConfigRaspi () {
 read -p "Entrer le nom du périphérique (ex : /dev/sda1) : " disk
 sudo mkdir /mnt/HDD
 sudo mount $disk /mnt/HDD
-sudo chown -R fguillouet:fguillouet /mnt/HDD
+sudo chown -R pi:pi /mnt/HDD
 sudo chmod -R 755 /mnt/HDD
 
 echo ""
