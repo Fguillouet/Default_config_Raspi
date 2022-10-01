@@ -47,11 +47,13 @@ Menu
 
 ConfigRaspi () {
 #Montage du disque en ntfs
-read -r "Entrer le nom du périphérique (ex : sda1)" disk
+read -p "Entrer le nom du périphérique (ex : sda1)" disk
 sudo mkdir /mnt/HDD
-sudo mount -t ntfs-3g "/dev/$disk" /mnt/HDD
+sudo mount /dev/$disk /mnt/HDD
 sudo chown -R pi:pi /mnt/HDD
 sudo chmod -R 755 /mnt/HDD
+
+pause
 
 clear 
 
