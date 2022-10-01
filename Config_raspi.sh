@@ -1,6 +1,5 @@
-#/bin/sh
-Menu
-function Menu {
+#!/bin/sh
+Menu () {
     echo "Prérequis : lancer la commande : tail -f /var/log/messages afin de voir quel est le nom du périphérique USB branché (exemple : sda1)"
     echo ""
     echo "1 - Mise a jour et installation des paquets de base"
@@ -8,7 +7,7 @@ function Menu {
     echo "3 - Vérifier le fonctionnement des services"
     echo "4 - Arret du script"
     echo ""
-    read -p "Choisissez une option (1-4) : " Input_String
+    read -r "Choisissez une option (1-4) : " Input_String
     case $Input_String in 
         1)
             UpdateAndInstallAndEnable    
@@ -21,7 +20,7 @@ function Menu {
         ;;
         4)
             echo "!! Arrêt du script !!"
-            break
+            return
         ;;
         *)
             echo "Entrée invalide, veuillez tapper un chiffre entre 1 et 4"
@@ -29,7 +28,7 @@ function Menu {
         esac
 }
 
-function UpdateAndInstallAndEnable {
+UpdateAndInstallAndEnable () {
 #Update
 sudo apt update && sudo apt upgrade -y
 
@@ -46,11 +45,11 @@ clear
 Menu
 } 
 
-function ConfigRaspi{
+ConfigRaspi () {
 #Montage du disque en ntfs
-read -p "Entrer le nom du périphérique (ex : sda1)" disk
+read -r "Entrer le nom du périphérique (ex : sda1)" disk
 sudo mkdir /mnt/HDD
-sudo mount -t ntfs-3g /dev/$disk /mnt/HDD
+sudo mount -t ntfs-3g "/dev/$disk" /mnt/HDD
 sudo chown -R pi:pi /mnt/HDD
 sudo chmod -R 755 /mnt/HDD
 
@@ -60,10 +59,11 @@ clear
 Menu
 }
 
-function CheckServices {
+CheckServices () {
 sudo service smbd status
 sudo service ntfs-3g status
 
 #Retour au menu
 Menu
 }
+Menu
