@@ -4,8 +4,7 @@ Menu () {
     echo ""
     echo "1 - Mise a jour et installation des paquets de base"
     echo "2 - Config de la raspi"
-    echo "3 - Vérifier le fonctionnement des services"
-    echo "4 - Arret du script"
+    echo "3 - Arret du script"
     echo ""
     read -p "Choisissez une option (1-3) : " Input_String
     case $Input_String in 
@@ -20,7 +19,7 @@ Menu () {
             return
         ;;
         *)
-            echo "Entrée invalide, veuillez tapper un chiffre entre 1 et 4"
+            echo "Entrée invalide, veuillez tapper un chiffre entre 1 et 3"
         ;;
         esac
 }
